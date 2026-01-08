@@ -1,0 +1,15 @@
+uploads/
+outputs/
+temp/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+*.mp4
+*.mov
+*.avi
+.env
+.DS_Store

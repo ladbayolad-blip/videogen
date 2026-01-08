@@ -1,0 +1,366 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Personalized Video Generator&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.loading {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 3px solid #f3f3f3;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-top: 3px solid #3b82f6;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 40px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 40px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>animation: spin 1s linear infinite;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@keyframes spin {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>0% { transform: rotate(0deg); }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>100% { transform: rotate(360deg); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body class="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen text-white"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="container mx-auto px-4 py-8 max-w-4xl"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Header --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="text-center mb-12"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h1 class="text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>Personalized Video Generator</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="text-gray-300"&gt;Create engaging videos with scrolling website backgrounds&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Tabs --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="flex gap-4 mb-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button onclick="showTab('single')" id="singleTab" class="flex-1 py-3 px-6 bg-cyan-500 rounded-lg font-semibold"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>Single Video</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button onclick="showTab('bulk')" id="bulkTab" class="flex-1 py-3 px-6 bg-slate-700 hover:bg-slate-600 rounded-lg font-semibold"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>Bulk Upload (CSV)</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Single Video Form --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="singleForm" class="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-2xl font-bold mb-6"&gt;Generate Single Video&lt;/h2&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;form id="singleVideoForm" class="space-y-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Video Upload --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label class="block text-sm font-medium mb-2"&gt;Your Video&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="file" id="singleVideo" accept="video/*" required</p>
+<p class="p1"><span class="Apple-converted-space">                           </span>class="w-full bg-slate-900/50 border border-slate-600 rounded-lg px-4 py-3 text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-cyan-500 file:text-white hover:file:bg-cyan-600"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-sm text-gray-400 mt-1"&gt;MP4, MOV, WebM (max 100MB)&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Website URL --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label class="block text-sm font-medium mb-2"&gt;Target Website URL&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="url" id="websiteUrl" placeholder="https://example.com" required</p>
+<p class="p1"><span class="Apple-converted-space">                           </span>class="w-full bg-slate-900/50 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Advanced Options --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;details class="bg-slate-900/30 rounded-lg p-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;summary class="cursor-pointer font-semibold"&gt;Advanced Options&lt;/summary&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="mt-4 space-y-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;label class="block text-sm mb-2"&gt;Duration (seconds)&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;input type="number" id="duration" value="10" min="5" max="60"</p>
+<p class="p1"><span class="Apple-converted-space">                                   </span>class="w-full bg-slate-900/50 border border-slate-600 rounded-lg px-4 py-2 text-white"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                        </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;label class="block text-sm mb-2"&gt;Scroll Speed&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;input type="range" id="scrollSpeed" min="50" max="200" value="100"</p>
+<p class="p1"><span class="Apple-converted-space">                                   </span>class="w-full" oninput="document.getElementById('scrollValue').textContent = this.value"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-sm text-gray-400"&gt;Speed: &lt;span id="scrollValue"&gt;100&lt;/span&gt;px&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;label class="block text-sm mb-2"&gt;Video Size (pixels)&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;input type="number" id="videoSize" value="300" min="200" max="500" step="50"</p>
+<p class="p1"><span class="Apple-converted-space">                                   </span>class="w-full bg-slate-900/50 border border-slate-600 rounded-lg px-4 py-2 text-white"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;label class="block text-sm mb-2"&gt;Video Position&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;select id="videoPosition" class="w-full bg-slate-900/50 border border-slate-600 rounded-lg px-4 py-2 text-white"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;option value="bottom-right"&gt;Bottom Right&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;option value="bottom-left"&gt;Bottom Left&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;option value="top-right"&gt;Top Right&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;option value="top-left"&gt;Top Left&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/details&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Submit Button --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button type="submit" class="w-full bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 text-white font-bold py-4 px-8 rounded-xl transition-all transform hover:scale-105"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>Generate Video</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/form&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Progress --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="singleProgress" class="hidden mt-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="flex items-center justify-center gap-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="loading"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p id="singleStatus"&gt;Generating video...&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Result --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="singleResult" class="hidden mt-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="bg-green-500/20 border border-green-500 rounded-lg p-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3 class="font-bold mb-2"&gt;✅ Video Generated Successfully!&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button onclick="downloadVideo()" class="bg-green-500 hover:bg-green-600 px-6 py-2 rounded-lg font-semibold"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>Download Video</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Bulk Upload Form --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="bulkForm" class="hidden bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-2xl font-bold mb-6"&gt;Bulk Video Generation&lt;/h2&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;form id="bulkVideoForm" class="space-y-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Video Upload --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label class="block text-sm font-medium mb-2"&gt;Your Video (Same for All)&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="file" id="bulkVideo" accept="video/*" required</p>
+<p class="p1"><span class="Apple-converted-space">                           </span>class="w-full bg-slate-900/50 border border-slate-600 rounded-lg px-4 py-3 text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-cyan-500 file:text-white hover:file:bg-cyan-600"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- CSV Upload --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label class="block text-sm font-medium mb-2"&gt;Lead List (CSV)&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="file" id="csvFile" accept=".csv" required</p>
+<p class="p1"><span class="Apple-converted-space">                           </span>class="w-full bg-slate-900/50 border border-slate-600 rounded-lg px-4 py-3 text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-purple-500 file:text-white hover:file:bg-purple-600"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-sm text-gray-400 mt-1"&gt;CSV format: name,website_url&lt;/p&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Example CSV --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="mt-2 bg-slate-900/50 rounded p-3 text-xs"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="font-semibold mb-1"&gt;Example CSV:&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;code class="text-cyan-400"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>name,website_url&lt;br&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>John Doe,https://example.com&lt;br&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>Jane Smith,https://another-site.com</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/code&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button type="submit" class="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-4 px-8 rounded-xl transition-all transform hover:scale-105"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>Generate All Videos</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/form&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Progress --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="bulkProgress" class="hidden mt-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="flex items-center justify-center gap-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="loading"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p id="bulkStatus"&gt;Processing videos...&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="mt-4 bg-slate-900/50 rounded-lg p-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="w-full bg-slate-700 rounded-full h-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div id="bulkProgressBar" class="bg-cyan-500 h-4 rounded-full transition-all" style="width: 0%"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-center mt-2 text-sm"&gt;&lt;span id="bulkCount"&gt;0&lt;/span&gt; / &lt;span id="bulkTotal"&gt;0&lt;/span&gt; videos generated&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Results --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="bulkResults" class="hidden mt-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3 class="font-bold text-xl mb-4"&gt;Generated Videos&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="bulkResultsList" class="space-y-2"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Recent Videos --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="mt-12 bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-2xl font-bold mb-6"&gt;Recent Videos&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="recentVideos" class="space-y-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="text-gray-400"&gt;Loading...&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const API_URL = 'http://localhost:8000';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let currentJobId = null;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Tab switching</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function showTab(tab) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (tab === 'single') {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('singleForm').classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('bulkForm').classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('singleTab').className = 'flex-1 py-3 px-6 bg-cyan-500 rounded-lg font-semibold';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('bulkTab').className = 'flex-1 py-3 px-6 bg-slate-700 hover:bg-slate-600 rounded-lg font-semibold';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('singleForm').classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('bulkForm').classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('singleTab').className = 'flex-1 py-3 px-6 bg-slate-700 hover:bg-slate-600 rounded-lg font-semibold';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('bulkTab').className = 'flex-1 py-3 px-6 bg-purple-500 rounded-lg font-semibold';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Single video form</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('singleVideoForm').addEventListener('submit', async (e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>e.preventDefault();</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const formData = new FormData();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>formData.append('video', document.getElementById('singleVideo').files[0]);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>formData.append('website_url', document.getElementById('websiteUrl').value);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>formData.append('duration', document.getElementById('duration').value);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>formData.append('scroll_speed', document.getElementById('scrollSpeed').value);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>formData.append('video_size', document.getElementById('videoSize').value);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>formData.append('video_position', document.getElementById('videoPosition').value);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('singleProgress').classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('singleResult').classList.add('hidden');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const response = await fetch(`${API_URL}/api/generate-video`, {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>method: 'POST',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>body: formData</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const data = await response.json();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>currentJobId = data.job_id;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('singleProgress').classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('singleResult').classList.remove('hidden');</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>loadRecentVideos();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} catch (error) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>alert('Error: ' + error.message);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('singleProgress').classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Bulk video form</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('bulkVideoForm').addEventListener('submit', async (e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>e.preventDefault();</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const formData = new FormData();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>formData.append('video', document.getElementById('bulkVideo').files[0]);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>formData.append('csv_file', document.getElementById('csvFile').files[0]);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>formData.append('duration', '10');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>formData.append('scroll_speed', '100');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>formData.append('video_size', '300');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>formData.append('video_position', 'bottom-right');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('bulkProgress').classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('bulkResults').classList.add('hidden');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const response = await fetch(`${API_URL}/api/generate-bulk`, {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>method: 'POST',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>body: formData</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const data = await response.json();</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('bulkProgress').classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('bulkResults').classList.remove('hidden');</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const resultsList = document.getElementById('bulkResultsList');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>resultsList.innerHTML = '';</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>data.results.forEach(result =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const div = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>div.className = 'bg-slate-900/50 rounded-lg p-4 flex justify-between items-center';</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (result.status === 'success') {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>div.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="font-semibold"&gt;${result.name}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-sm text-gray-400"&gt;${result.website}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;a href="${API_URL}${result.download_url}" download</p>
+<p class="p1"><span class="Apple-converted-space">                               </span>class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg text-sm font-semibold"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>Download</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>div.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="font-semibold"&gt;${result.name}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-sm text-red-400"&gt;${result.error}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-red-500"&gt;❌ Failed&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>resultsList.appendChild(div);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>loadRecentVideos();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} catch (error) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>alert('Error: ' + error.message);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('bulkProgress').classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Download video</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function downloadVideo() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (currentJobId) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>window.open(`${API_URL}/api/download/${currentJobId}`, '_blank');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Load recent videos</p>
+<p class="p1"><span class="Apple-converted-space">        </span>async function loadRecentVideos() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const response = await fetch(`${API_URL}/api/list-videos`);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const data = await response.json();</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const container = document.getElementById('recentVideos');</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (data.videos.length === 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>container.innerHTML = '&lt;p class="text-gray-400"&gt;No videos yet&lt;/p&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>container.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>data.videos.forEach(video =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const div = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>div.className = 'bg-slate-900/50 rounded-lg p-4 flex justify-between items-center';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>div.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="font-semibold"&gt;${video.filename}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-sm text-gray-400"&gt;${video.size_mb} MB&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;a href="${API_URL}/api/download/${video.job_id}" download</p>
+<p class="p1"><span class="Apple-converted-space">                           </span>class="bg-cyan-500 hover:bg-cyan-600 px-4 py-2 rounded-lg text-sm font-semibold"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>Download</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>container.appendChild(div);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} catch (error) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>console.error('Error loading videos:', error);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Load recent videos on page load</p>
+<p class="p1"><span class="Apple-converted-space">        </span>loadRecentVideos();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
