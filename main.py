@@ -1,25 +1,19 @@
-Python 3.14.2 (v3.14.2:df793163d58, Dec  5 2025, 12:18:06) [Clang 16.0.0 (clang-1600.0.26.6)] on darwin
-Enter "help" below or click "Help" above for more information.
 """
 Personalized Video Generator Backend
-Requirements: pip install fastapi uvicorn python-multipart playwright opencv-python-headless moviepy pillow pandas
-Also run: playwright install chromium
+Complete main.py file for deployment
 """
 
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 import asyncio
+import os
 import uuid
 import shutil
 from pathlib import Path
 from typing import Optional
 import csv
 import json
-import os
-
-# Configuration for production
-PORT = int(os.getenv("PORT", 8000))
 
 # Video processing
 from moviepy.editor import VideoFileClip, ImageSequenceClip, CompositeVideoClip
@@ -29,6 +23,9 @@ import numpy as np
 
 # Web scraping
 from playwright.async_api import async_playwright
+
+# Configuration for production
+PORT = int(os.getenv("PORT", 8000))
 
 app = FastAPI(title="Personalized Video Generator API")
 
@@ -393,43 +390,43 @@ async def download_video(job_id: str):
         filename=video_files[0].name
     )
 
-... 
-... @app.get("/api/list-videos")
-... async def list_videos():
-...     """List all generated videos"""
-...     
-...     videos = []
-...     for video_path in OUTPUT_DIR.glob("*.mp4"):
-...         videos.append({
-...             "filename": video_path.name,
-...             "job_id": video_path.stem.split('_')[0],
-...             "size_mb": round(video_path.stat().st_size / 1024 / 1024, 2)
-...         })
-...     
-...     return {"videos": videos}
-... 
-... 
-... @app.delete("/api/cleanup")
-... async def cleanup():
-...     """Clean up old files"""
-...     
-...     deleted = {"uploads": 0, "outputs": 0, "temp": 0}
-...     
-...     for file in UPLOAD_DIR.glob("*"):
-...         file.unlink()
-...         deleted["uploads"] += 1
-...     
-...     for file in OUTPUT_DIR.glob("*"):
-...         file.unlink()
-...         deleted["outputs"] += 1
-...     
-...     for file in TEMP_DIR.glob("*"):
-...         file.unlink()
-...         deleted["temp"] += 1
-...     
-...     return {"message": "Cleanup complete", "deleted": deleted}
-... 
-... 
-... if __name__ == "__main__":
-   	import uvicorn
-    	uvicorn.run(app, host="0.0.0.0", port=PORT)
+
+@app.get("/api/list-videos")
+async def list_videos():
+    """List all generated videos"""
+    
+    videos = []
+    for video_path in OUTPUT_DIR.glob("*.mp4"):
+        videos.append({
+            "filename": video_path.name,
+            "job_id": video_path.stem.split('_')[0],
+            "size_mb": round(video_path.stat().st_size / 1024 / 1024, 2)
+        })
+    
+    return {"videos": videos}
+
+
+@app.delete("/api/cleanup")
+async def cleanup():
+    """Clean up old files"""
+    
+    deleted = {"uploads": 0, "outputs": 0, "temp": 0}
+    
+    for file in UPLOAD_DIR.glob("*"):
+        file.unlink()
+        deleted["uploads"] += 1
+    
+    for file in OUTPUT_DIR.glob("*"):
+        file.unlink()
+        deleted["outputs"] += 1
+    
+    for file in TEMP_DIR.glob("*"):
+        file.unlink()
+        deleted["temp"] += 1
+    
+    return {"message": "Cleanup complete", "deleted": deleted}
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=PORT)
